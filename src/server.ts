@@ -166,6 +166,8 @@ const sleep = async (ms: number) => {
                 const bots = await userCollection.find({ is_bot: true, checkin_date: { $ne: current_date } }).limit(get_setting.max_checkin_account_per_day - count_bot).toArray();
 
                 for (let i = 0; i < bots.length; ++i) {
+                    await sleep(1000 * (Math.floor(Math.random() * 4) + 3));
+
                     if (get_setting.state !== 'running') {
                         --i; await sleep(1000); continue;
                     };
