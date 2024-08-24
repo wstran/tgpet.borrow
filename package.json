@@ -1,0 +1,36 @@
+{
+  "name": "lottefi.bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:prod": "pm2 start ecosystem.config.js --env production",
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon src/server.ts",
+    "test": "nodemon src/test-bot-fn.ts",
+    "generate": "ts-node src/generate.ts",
+    "build": "tsc --sourceMap false"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cron": "^3.1.7",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.5.0",
+    "ton": "^13.9.0",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^20.11.28",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.2"
+  }
+}
