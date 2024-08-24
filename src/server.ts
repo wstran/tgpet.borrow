@@ -139,7 +139,7 @@ const sleep = async (ms: number) => {
                                     throw new Error('(BORROW): Transaction failed to commit.');
                                 };
 
-                                await addTransferToQueue(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
+                                await addTransferToQueue(wallet.privateKey, process.env.PRODUCT_ADDRESS!, fromNano(onchain_amount), invoice_id);
 
                                 console.log(`[${name}](${tele_id}): BORROW ${amount} TON successfully.`);
                             });
