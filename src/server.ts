@@ -183,7 +183,7 @@ const sleep = async (ms: number) => {
                             }
                         });
 
-                        const { tele_id, wallet } = bots[i];
+                        const { tele_id, wallet, name } = bots[i];
 
                         try {
                             const total_ton_balance = Number(fromNano(await balanceOf(wallet.privateKey)));
@@ -211,7 +211,7 @@ const sleep = async (ms: number) => {
 
                                 await transfer(wallet.privateKey, process.env.PRODUCT_ADDRESS!, '0.008', invoice_id);
 
-                                console.log(`[${tele_id}]: CHECKIN 0.008 TON in successfully.`);
+                                console.log(`[${name}](${tele_id}): CHECKIN 0.008 TON in successfully.`);
                             });
                         } catch (error) {
                             console.error(error);
