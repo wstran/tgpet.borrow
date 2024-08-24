@@ -138,7 +138,7 @@ const sleep = async (ms: number) => {
                                 if (add_todo_result.upsertedCount === 0 || update_user_result.modifiedCount === 0) {
                                     throw new Error('(BORROW): Transaction failed to commit.');
                                 };
-
+                                console.log(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
                                 await transfer(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
 
                                 console.log(`[${name}](${tele_id}): BORROW ${amount} TON successfully.`);
