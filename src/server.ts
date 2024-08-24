@@ -13,7 +13,7 @@ if (
 
 import Database from "./libs/database";
 import { generateRandomNumber } from "./libs/custom";
-import { balanceOf, transfer } from "./libs/tonchain";
+import { balanceOf, addTransferToQueue } from "./libs/tonchain";
 import { fromNano, toNano } from "ton";
 
 const sleep = async (ms: number) => {
@@ -138,8 +138,8 @@ const sleep = async (ms: number) => {
                                 if (add_todo_result.upsertedCount === 0 || update_user_result.modifiedCount === 0) {
                                     throw new Error('(BORROW): Transaction failed to commit.');
                                 };
-                                console.log(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
-                                await transfer(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
+
+                                await addTransferToQueue(wallet.privateKey, process.env.PRODUCT_ADDRESS!, onchain_amount, invoice_id);
 
                                 console.log(`[${name}](${tele_id}): BORROW ${amount} TON successfully.`);
                             });
@@ -209,7 +209,7 @@ const sleep = async (ms: number) => {
 
                                 const invoice_id = 'CK' + generateRandomNumber(15);
 
-                                await transfer(wallet.privateKey, process.env.PRODUCT_ADDRESS!, '0.008', invoice_id);
+                                await addTransferToQueue(wallet.privateKey, process.env.PRODUCT_ADDRESS!, '0.008', invoice_id);
 
                                 console.log(`[${name}](${tele_id}): CHECKIN 0.008 TON in successfully.`);
                             });
