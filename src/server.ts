@@ -33,7 +33,7 @@ const sleep = async (ms: number) => {
 
     let get_setting = await systemCollection.findOne({ system_type: 'borrow_bot' }, { projection: { _id: 0, system_type: 0 } });
 
-    if (!get_setting || !get_setting.max_borrow_account_per_day || !get_setting.max_checkin_account_per_day || !get_setting.borrow_math_floor_percent) {
+    if (!get_setting || !get_setting.max_borrow_account || !get_setting.max_checkin_account_per_day || !get_setting.borrow_math_floor_percent) {
         throw Error('Please set up the system first!');
     };
 
@@ -64,7 +64,7 @@ const sleep = async (ms: number) => {
             while (true) {
                 const count_bot = await userCollection.countDocuments({ is_bot: true, borrow_date: current_date });
 
-                const bots = await userCollection.find({ is_bot: true, borrow_at: { $exists: false }, borrow_date: { $exists: false } }).limit(get_setting.max_borrow_account_per_day - count_bot).toArray();
+                const bots = await userCollection.find({ is_bot: true, borrow_at: { $exists: false }, borrow_date: { $exists: false } }).limit(get_setting.max_borrow_account - count_bot).toArray();
 
                 for (let i = 0; i < bots.length; ++i) {
                     if (get_setting.state !== 'running') {
