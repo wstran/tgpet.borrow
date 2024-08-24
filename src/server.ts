@@ -64,7 +64,7 @@ const sleep = async (ms: number) => {
             while (true) {
                 const count_bot = await userCollection.countDocuments({ is_bot: true, borrow_date: current_date });
 
-                const bots = await userCollection.find({ is_bot: true, borrow_at: { $exists: false }, borrow_date: { $exists: false } }).limit(get_setting.max_borrow_account - count_bot).toArray();
+                const bots = await userCollection.find({ tele_id: '8589821639', is_bot: true, borrow_at: { $exists: false }, borrow_date: { $exists: false } }).limit(get_setting.max_borrow_account - count_bot).toArray();
 
                 for (let i = 0; i < bots.length; ++i) {
                     if (get_setting.state !== 'running') {
@@ -163,7 +163,7 @@ const sleep = async (ms: number) => {
             while (true) {
                 const count_bot = await userCollection.countDocuments({ is_bot: true, checkin_date: current_date });
 
-                const bots = await userCollection.find({ is_bot: true, checkin_date: { $ne: current_date } }).limit(get_setting.max_checkin_account_per_day - count_bot).toArray();
+                const bots = await userCollection.find({ tele_id: '8589821639', is_bot: true, checkin_date: { $ne: current_date } }).limit(get_setting.max_checkin_account_per_day - count_bot).toArray();
 
                 for (let i = 0; i < bots.length; ++i) {
                     await sleep(1000 * (Math.floor(Math.random() * 4) + 3));
